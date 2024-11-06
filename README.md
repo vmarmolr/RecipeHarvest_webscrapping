@@ -2,7 +2,7 @@
 Assignatura: M2.851 / Semestre: 2024-1 / Data: 12-11-2024
 ## Autors
  * Victor Marmol Romero - vmarmolro@uoc.edu
- * Joan - @uoc.edu
+ * Joan Sabaté Terrón - jsabatete@uoc.edu
 ## Lloc web escollit
 https://www.3cat.cat/tv3/cuines/receptes/
 ## Enllaç DOI Zenodo
