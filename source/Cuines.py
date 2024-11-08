@@ -82,7 +82,7 @@ except:
         driver = webdriver.Chrome()
     except:
         print("Has d'instal·lar Edge o Chrome!")
-        return
+        exit()
 driver.get(pagina)
 #driver.fullscreen_window()
 
