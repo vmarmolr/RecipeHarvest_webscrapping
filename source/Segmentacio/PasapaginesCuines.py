@@ -33,7 +33,7 @@ while i <= 20: #ultimaPagina:
     print("Estem a la pagina:", paginacio, "de", ultimaPagina, "\n")
     if i != ultimaPagina:
         try:
-            seguent = driver.find_element(By.CSS_SELECTOR, "li.R-seg a[data-toggle='tab']")
+            seguent = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "li.R-seg a[title='Següent']")))
             seguent.click()
         except:
             break
