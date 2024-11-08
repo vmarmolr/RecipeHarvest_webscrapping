@@ -75,7 +75,10 @@ urls = []
 i = 1
 
 # Obrim el navegador i accedim a la pagina
-driver = webdriver.Edge()
+try:
+    driver = webdriver.Edge()
+except:
+    driver = webdriver.Chrome()
 driver.get(pagina)
 #driver.fullscreen_window()
 
