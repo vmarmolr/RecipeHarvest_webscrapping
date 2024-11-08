@@ -8,8 +8,11 @@ import requests
 import time 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import csv
 import random
+from datetime import datetime, timezone
 
 # Modificar User Agent
 
@@ -45,9 +48,7 @@ soupPage= BeautifulSoup(page.content, features="html.parser")
 ultimaPagina = soupPage.find("p", class_="numeracio")
 ultimaPagina = ultimaPagina.text.split(" ")[3]
 ultimaPagina = int(ultimaPagina)
-print("La pagina diu que tenim un total de", ultimaPagina, "pagines! \n")
-
-#'''
+print("Tenim un total de", ultimaPagina, "pagines! \n")
 
 # Definim la funció que extreu les receptes
 def extreure_receptes(website, numpag):
@@ -74,8 +75,9 @@ urls = []
 i = 1
 
 # Obrim el navegador i accedim a la pagina
-driver = webdriver.Chrome()
+driver = webdriver.Edge()
 driver.get(pagina)
+#driver.fullscreen_window()
 
 # Esperem un segon per a que carregui
 time.sleep(1)
@@ -85,7 +87,7 @@ cookies = driver.find_element(By.ID, "didomi-notice-disagree-button")
 cookies.click()
 
 # Guardem i imprimim el temps d'inici
-iniciurl = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
+iniciurl = datetime.now(timezone.utc)
 print(iniciurl, "\n")
 
 # Iniciem el bucle per a cada pagina
@@ -101,25 +103,24 @@ while i <= ultimaPagina:
     # si no estem a la ultima pagina passar de pagina
     if i != ultimaPagina:
         try:
-            seguent = driver.find_element(By.CSS_SELECTOR, "li.R-seg a[data-toggle='tab']")
+            seguent = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "li.R-seg a[title='Següent']")))
             seguent.click()
         except:
             # si no tenim el boto de passar pagina sortir del bucle
             break
         # Esperar per a que sembli una navegacio mes humana
-        time.sleep(random.uniform(2, 4))
+        time.sleep(random.uniform(1, 4))
     # passar de pagina
     i += 1
 
 # Tancar el navegador
 driver.quit()
 
-# Definir la ultima pagina real i imprimir-la 
-ultimapaginaReal = i-1 
-print("Realment tenim", ultimapaginaReal, "pagines\n")
+# imprimir el numero d'iteracions 
+print("Hem fet", i, "iteracions\n")
 
 # Guardar i imprimir el temps de finalitzacio
-finalurl = time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime())
+finalurl = datetime.now(timezone.utc)
 print(finalurl, "\n")
 # Imprimir el temps que hem trigat
 print("Hem trigat", finalurl-iniciurl, "per aconseguir les urls\n")
@@ -138,6 +139,9 @@ with open('urls.txt', 'w') as f:
 # inicialitzem la llista de receptes i l'iterador del seguent bucle        
 llistaReceptes = []
 numrecepta = 0
+
+iniciwebscrapping = datetime.now(timezone.utc)
+print(iniciwebscrapping)
 
 # Per a cada fila de les urls
 for linkRecepta, img_url, numpag in urls:
@@ -235,7 +239,6 @@ for linkRecepta, img_url, numpag in urls:
         # Si no, guardem un buit
         Imatge = None
 #    print(Imatge)
-#'''''''
     
     # Creem el diccionari
     recepta = {
@@ -254,6 +257,12 @@ for linkRecepta, img_url, numpag in urls:
     # Afegim a la llista de diccionaris
     llistaReceptes.append(recepta)
 
+# Guardar i imprimir el temps de finalitzacio
+finalwebscrapping = datetime.now(timezone.utc)
+print(finalwebscrapping, "\n")
+# Imprimir el temps que hem trigat
+print("Hem trigat", finalwebscrapping-iniciwebscrapping, "per aconseguir fer el webscrapping\n")
+
 # Creem l'arxiu csv i exportem tota la llista de diccionaris
 with open('receptes.csv', mode='w', newline='', encoding='utf-8') as arxiu_csv:
     camps=llistaReceptes[0].keys()
@@ -261,4 +270,3 @@ with open('receptes.csv', mode='w', newline='', encoding='utf-8') as arxiu_csv:
     
     escriptor_csv.writeheader()
     escriptor_csv.writerows(llistaReceptes)
-#'''
