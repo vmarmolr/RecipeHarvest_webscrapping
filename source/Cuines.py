@@ -78,7 +78,10 @@ i = 1
 try:
     driver = webdriver.Edge()
 except:
-    driver = webdriver.Chrome()
+    try:
+        driver = webdriver.Chrome()
+    except:
+        return
 driver.get(pagina)
 #driver.fullscreen_window()
 
