@@ -6,7 +6,8 @@ Assignatura: M2.851 / Semestre: 2024-1 / Data: 12-11-2024
 ## Lloc web escollit
 https://www.3cat.cat/tv3/cuines/receptes/
 ## Enllaç DOI Zenodo
-El dataset ha estat publicat a Zenodo amb DOI: 
+El dataset ha estat publicat a Zenodo amb [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14054272.svg)](https://doi.org/10.5281/zenodo.14054272)
+
 ## Descripció del repositori
 El repositori consta de la carpeta dataset que conté les dades que obtenim dels diferents programes, la carpeta source que conté els programes, dins d'aquesta la carpeta Segmentacio que conté els programes que hem utilitzat per a comprovar cada part del programa principal, el README i el document pdf. Els fitxers que podem trobar en aquest repositori són:
  * /dataset/receptes.csv: fitxer amb el joc de dades.
