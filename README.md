@@ -21,3 +21,5 @@ El repositori consta de la carpeta dataset que conté les dades que obtenim dels
 Per a obtenir el dataset hem d'executar el programa Cuines.py i aquest s'encarregarà de produir el fitxer urls.txt amb totes les urls de les receptes que tindrà el nostre dataset i el fitxer receptes.csv amb tot el dataset.
 És important saber que necessitem una connexió a internet i tenir instal·lat els navegadors Microsoft Edge o Google Chrome per a executar el programa Cuines.py.
 També cal destacar que el temps d'execució és molt llarg i tediós però estem parlant d'aconseguir extreure dades de gairebé 8000 receptes amb una paginació dinàmica.
+
+De tota manera, es recomana llegir la memòria i veure el video per entendre bé cada part del programa.
